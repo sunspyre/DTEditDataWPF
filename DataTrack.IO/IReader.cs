@@ -8,6 +8,8 @@ namespace DataTrack.IO
 {
     interface IReader
     {
-        List<Record> GetList();
+        IEnumerable<DataTrackFile> GetFolderContents();
+
+        IEnumerable<Record> GetFileContents(string fileName);
     }
 }

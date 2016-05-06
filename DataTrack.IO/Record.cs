@@ -7,5 +7,6 @@ namespace DataTrack.IO
 {
     public class Record
     {
+
     }
 }

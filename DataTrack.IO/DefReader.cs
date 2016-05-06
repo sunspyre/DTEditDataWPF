@@ -34,12 +34,12 @@ namespace DataTrack.IO
 
     }
 
-    public class BadgeReader : IReader
+    public class DefReader : IReader
     {
         private string _path;
         private List<Record> _list;
 
-        public BadgeReader(string path)
+        public DefReader(string path)
         {
             _path = path;
             _list = new List<Record>();
@@ -82,7 +82,12 @@ namespace DataTrack.IO
             }
         }
 
-        public List<Record> GetList()
+        public IEnumerable<DataTrackFile> GetFolderContents()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Record> GetFileContents(string fileName)
         {
             return _list;
         }

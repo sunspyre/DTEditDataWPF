@@ -8,15 +8,15 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <TabControl x:Name="tabControl" Margin="0,0,10,10">
-            <TabItem Header="TabItem">
+            <TabItem Header="Edit Data">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid" Margin="10"/>
+                    <DataGrid x:Name="gridMain" Margin="10"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem">
+            <TabItem Header="Settings">
                 <Grid Background="#FFE5E5E5">
                     <StackPanel HorizontalAlignment="Left" Height="258" Margin="10,10,0,0" VerticalAlignment="Top" Width="477">
-                        <CheckBox x:Name="checkBox" Content="CheckBox"/>
+                        <CheckBox x:Name="checkBox" Content="Option1"/>
                         <CheckBox x:Name="checkBox1" Content="CheckBox"/>
                         <CheckBox x:Name="checkBox2" Content="CheckBox"/>
                         <CheckBox x:Name="checkBox3" Content="CheckBox"/>

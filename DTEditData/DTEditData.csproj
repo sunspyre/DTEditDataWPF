@@ -64,7 +64,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ExceptionHandler.cs" />
-    <Compile Include="Folder.cs" />
     <Compile Include="Lock.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
