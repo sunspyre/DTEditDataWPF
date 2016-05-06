@@ -9,7 +9,6 @@ namespace DataTrack.IO
     {
         public string FileName { get; set; }
         public string Path { get; set; }
-        public DateTime LastModified { get; set; }
         public DateTime LastAccessed { get; set; }
     }
 }

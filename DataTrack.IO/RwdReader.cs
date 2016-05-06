@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataTrack.IO.Structs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,15 +7,6 @@ using System.Text;
 
 namespace DataTrack.IO
 {
-    public class Scan : Record
-    {
-        public DateTime Date { get; set; }
-        public DateTime Time { get; set; }
-        public string Device { get; set; }
-        public string Probe { get; set; }
-        public string Button { get; set; }
-    }
-
     public class RwdReader : IReader
     {
         string _path;
@@ -25,6 +17,10 @@ namespace DataTrack.IO
         public RwdReader(string path)
         {
             _path = path;
+        }
+
+        public IEnumerable<DataTrackFile> GetFolderContents()
+        {
             _fileList = new List<DataTrackFile>();
 
             DirectoryInfo di = new DirectoryInfo($"{_path}\\{Folder.Data}");
@@ -39,10 +35,6 @@ namespace DataTrack.IO
                     LastAccessed = item.LastAccessTime
                 });
             }
-        }
-
-        public IEnumerable<DataTrackFile> GetFolderContents()
-        {
             return _fileList;
         }
 

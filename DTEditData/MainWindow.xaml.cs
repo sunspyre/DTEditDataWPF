@@ -1,4 +1,5 @@
 ﻿using DataTrack.IO;
+using DataTrack.IO.Structs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace DTEditData
         public MainWindow()
         {
             InitializeComponent();
-            _currentDirectory = BADGEFILE; //get path by args?
+            _currentDirectory = Environment.CurrentDirectory; //get path by args?
             GetBadges();
             GetFiles();
             PopulateControls();
@@ -64,22 +65,53 @@ namespace DTEditData
 
         private void PopulateControls()
         {
-            gridMain.Columns.Add(new DataGridTextColumn {
-                Header = "Badge ID",
-                Binding = new Binding("Badge ID")
-            });
+            #region Badge Columns
 
-            gridMain.Columns.Add(new DataGridTextColumn
+            gridBadges.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Badge ID",
+                Binding = new Binding("BadgeId")
+            });
+            gridBadges.Columns.Add(new DataGridTextColumn
             {
                 Header = "Button ID",
-                Binding = new Binding("Button ID")
+                Binding = new Binding("ButtonId")
+            });
+            gridBadges.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Desc.",
+                Binding = new Binding("Desc")
+            });
+            gridBadges.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Type",
+                Binding = new Binding("Type1")
+            });
+            gridBadges.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Type 2",
+                Binding = new Binding("Type2")
+            });
+            gridBadges.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Sp.",
+                Binding = new Binding("Special")
+            });
+            gridBadges.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Misc",
+                Binding = new Binding("Misc")
+            });
+            gridBadges.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Extra",
+                Binding = new Binding("ExtraDetails")
             });
 
-            gridMain.Columns.Add(new DataGridTextColumn
-            {
-                Header = "Probe",
-                Binding = new Binding("Probe")
-            });
+            #endregion
+
+            //TODO: implement this
+            #region DataTrack Columns
 
             gridMain.Columns.Add(new DataGridTextColumn
             {
@@ -87,6 +119,15 @@ namespace DTEditData
                 Binding = new Binding("Date")
             });
 
+            /*
+                //Hide a column:
+            gridMain.Columns[0].Visibility = Visibility.Collapsed;
+            */
+
+            #endregion
+
+
+            gridBadges.ItemsSource = _badgeList;
         }
 
         #endregion

@@ -2,52 +2,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using DataTrack.IO;
 using System.Linq;
 using System.Text;
+using DataTrack.IO.Structs;
 
 namespace DataTrack.IO
 {
-    public class Badge : Record
-    {
-        private string badgeId;
-
-        public string BadgeId
-        {
-            get { return badgeId; }
-            set { badgeId = value.PadLeft(6, '0'); }
-        }
-
-        private string buttonId;
-
-        public string ButtonId
-        {
-            get { return buttonId; }
-            set { buttonId = value.PadLeft(12, '0'); }
-        }
-
-        public string Desc { get; set; }
-        public string Type1 { get; set; }
-        public string Type2 { get; set; }
-        public int Special { get; set; }
-        public string Misc { get; set; }
-        public string ExtraDetails { get; set; }
-
-    }
-
     public class DefReader : IReader
     {
         private string _path;
-        private List<Record> _list;
+        private List<Record> _badgeList;
+        private List<DataTrackFile> _fileList;
 
         public DefReader(string path)
         {
             _path = path;
-            _list = new List<Record>();
-            string[] _contents;
+        }
 
+        public IEnumerable<DataTrackFile> GetFolderContents()
+        {
+            _fileList = new List<DataTrackFile>();
+
+            DirectoryInfo di = new DirectoryInfo($"{_path}\\{Folder.Def}");
+            FileInfo[] files = di.GetFiles("*.def");
+
+            foreach (var item in files)
+            {
+                _fileList.Add(new DataTrackFile
+                {
+                    FileName = item.Name,
+                    Path = item.FullName,
+                    LastAccessed = item.LastAccessTime
+                });
+            }
+            return _fileList;
+        }
+
+        public IEnumerable<Record> GetFileContents(string fileName)
+        {
+            switch (fileName.ToLower())
+            {
+                case "badge.def":
+                    return ParseBadge(fileName);
+                default:
+                    return null;
+            }
+        }
+
+        private IEnumerable<Record> ParseBadge(string fileName)
+        {
+            _badgeList = new List<Record>();
+            string[] _contents;
             try
             {
-                using (StreamReader sr = new StreamReader(path))
+                using (StreamReader sr = new StreamReader($"{_path}\\{Folder.Def}\\{fileName}"))
                 {
                     _contents = sr.ReadToEnd().Split('\n');
                 }
@@ -58,11 +67,11 @@ namespace DataTrack.IO
                         (i + 1) > _contents.Length)
                         continue;
                     string[] line = _contents[i].Replace("\r", string.Empty).Split(';');
-                    string extraDetails = _contents[i + 1];
+                    string extraDetails = _contents[i + 1].Replace("\r", string.Empty);
                     if (line.Length < 8) //Make sure there are at least 8 amount of elements per badge line
                         continue;
 
-                    _list.Add(new Badge
+                    _badgeList.Add(new Badge
                     {
                         //Hash = line[0] Unneccesary
                         Type1 = line[1],
@@ -80,16 +89,9 @@ namespace DataTrack.IO
             {
                 throw new IOException(ex.Message);
             }
+            return _badgeList;
         }
 
-        public IEnumerable<DataTrackFile> GetFolderContents()
-        {
-            throw new NotImplementedException();
-        }
 
-        public IEnumerable<Record> GetFileContents(string fileName)
-        {
-            return _list;
-        }
     }
 }
