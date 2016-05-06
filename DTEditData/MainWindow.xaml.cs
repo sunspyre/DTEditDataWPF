@@ -28,7 +28,7 @@ namespace DTEditData
         private const string DATAFOLDER = "data";
         private const string BADGEFILE = "badge.def";
 
-        internal List<Badge> _badgeList;
+        internal List<Record> _badgeList;
 
         public MainWindow()
         {
@@ -50,11 +50,7 @@ namespace DTEditData
                 BadgeReader br = new BadgeReader($@"{_currentDirectory}\{DEFFOLDER}\{BADGEFILE}");
                 _badgeList = br.GetList();
             }
-            catch (Exception)
-            {
-
-            }
-
+            catch (Exception ex) {ExceptionHandler.Handle(ex);}
         }
 
         #region Events

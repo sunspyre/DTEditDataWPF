@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace DataTrack.IO
 {
-    public class Badge
+    public class Badge : Record
     {
         private string badgeId;
 
@@ -30,17 +31,18 @@ namespace DataTrack.IO
         public int Special { get; set; }
         public string Misc { get; set; }
         public string ExtraDetails { get; set; }
+
     }
 
-    public class BadgeReader
+    public class BadgeReader : IReader
     {
         private string _path;
-        private List<Badge> _badgeList;
+        private List<Record> _list;
 
         public BadgeReader(string path)
         {
             _path = path;
-            _badgeList = new List<Badge>();
+            _list = new List<Record>();
             string[] _contents;
 
             try
@@ -60,7 +62,7 @@ namespace DataTrack.IO
                     if (line.Length < 8) //Make sure there are at least 8 amount of elements per badge line
                         continue;
 
-                    _badgeList.Add(new Badge
+                    _list.Add(new Badge
                     {
                         //Hash = line[0] Unneccesary
                         Type1 = line[1],
@@ -80,9 +82,9 @@ namespace DataTrack.IO
             }
         }
 
-        public List<Badge> GetList()
+        public List<Record> GetList()
         {
-            return _badgeList;
+            return _list;
         }
     }
 }
