@@ -44,9 +44,17 @@ namespace DTEditData
 
         private void GetBadges()
         {
-            _currentDirectory = BADGEFILE; //get path by args?
-            BadgeReader br = new BadgeReader($@"{_currentDirectory}\{DEFFOLDER}\{BADGEFILE}");
-            _badgeList = br.GetList();
+            try
+            {
+                _currentDirectory = BADGEFILE; //get path by args?
+                BadgeReader br = new BadgeReader($@"{_currentDirectory}\{DEFFOLDER}\{BADGEFILE}");
+                _badgeList = br.GetList();
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
 
         #region Events
