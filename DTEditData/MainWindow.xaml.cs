@@ -1,20 +1,11 @@
 ﻿using DataTrack.IO;
 using DataTrack.IO.Structs;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DTEditData
 {
@@ -65,6 +56,16 @@ namespace DTEditData
 
         private void PopulateControls()
         {
+
+            #region RWD Grid
+            gridDates.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Date",
+                Binding = new Binding("FileName")
+            });
+            gridDates.ItemsSource = _rwdList;
+            #endregion
+
             #region Badge Columns
 
             gridBadges.Columns.Add(new DataGridTextColumn
@@ -108,6 +109,8 @@ namespace DTEditData
                 Binding = new Binding("ExtraDetails")
             });
 
+            gridBadges.ItemsSource = _badgeList;
+
             #endregion
 
             //TODO: implement this
@@ -127,13 +130,23 @@ namespace DTEditData
             #endregion
 
 
-            gridBadges.ItemsSource = _badgeList;
+            
         }
 
         #endregion
 
         #region Events
 
+        private void gridDates_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            foreach (DataTrackFile item in gridDates.SelectedItems)
+            {
+                MessageBox.Show(item.Path);
+            }
+        }
+
         #endregion
+
+
     }
 }

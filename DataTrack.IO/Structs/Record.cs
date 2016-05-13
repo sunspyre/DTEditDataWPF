@@ -5,8 +5,14 @@ using System.Text;
 
 namespace DataTrack.IO.Structs
 {
-    public class Record
+    public abstract class Record
     {
+        public RecordType Type { get; set; }
+    }
 
+    public enum RecordType
+    {
+        Badge,
+        Scan
     }
 }

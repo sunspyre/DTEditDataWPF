@@ -6,17 +6,19 @@
         xmlns:local="clr-namespace:DTEditData"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <TabControl x:Name="tabControl" Margin="0,0,10,10">
-            <TabItem Header="Edit Data">
-                <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="gridMain" Margin="10"/>
+    <Grid Background="Black">
+        <TabControl x:Name="tabControl">
+            <TabItem Header="Main">
+                <Grid Background="#FFE5E5E5" Margin="128,0,0,0">
+                    <DataGrid x:Name="gridMain" Margin="10" AutoGenerateColumns="False"/>
+                    <DataGrid x:Name="gridDates" HorizontalAlignment="Left" Margin="-125,5,0,10" Width="113" MouseDoubleClick="gridDates_MouseDoubleClick" AutoGenerateColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Badges">
                 <Grid Background="#FFE5E5E5">
                     <StackPanel HorizontalAlignment="Left" Height="258" Margin="10,10,0,0" VerticalAlignment="Top" Width="477"/>
-                    <DataGrid x:Name="gridBadges" Margin="10"/>
+                    <DataGrid x:Name="gridBadges" Margin="10" AutoGenerateColumns="False" CanUserResizeRows="False" IsReadOnly="True"/>
+                    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Margin="40,-124,0,0"/>
                 </Grid>
             </TabItem>
         </TabControl>
