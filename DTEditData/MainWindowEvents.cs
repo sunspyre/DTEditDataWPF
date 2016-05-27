@@ -15,7 +15,8 @@ namespace DTEditData
         {
             foreach (DataTrackFile item in gridDates.SelectedItems)
             {
-                MessageBox.Show(item.Path);
+                ActivityLog.Log($"Opening RWD {item.Path}");
+                //MessageBox.Show(item.Path);
             }
         }
     }

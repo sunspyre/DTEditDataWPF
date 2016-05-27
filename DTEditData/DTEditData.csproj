@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ActivityLog.cs" />
     <Compile Include="DateTimeConvert.cs" />
     <Compile Include="MainWindowEvents.cs" />
     <Compile Include="MainWindowGridLogic.cs" />

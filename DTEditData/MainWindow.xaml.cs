@@ -26,7 +26,7 @@ namespace DTEditData
         public MainWindow()
         {
             InitializeComponent();
-            
+            GetArgs();
             GetBadges();
             GetFiles();
             PopulateControls();
@@ -49,7 +49,7 @@ namespace DTEditData
                 DefReader br = new DefReader(_currentDirectory);
                 _badgeList = br.GetFileContents(BADGEFILE).ToList();
             }
-            catch (Exception ex) {ExceptionHandler.Handle(ex);}
+            catch (Exception ex) { ExceptionHandler.Handle(ex, "Error getting list of badges"); }
         }
 
         private void GetFiles()
@@ -59,7 +59,7 @@ namespace DTEditData
                 RwdReader rr = new RwdReader(_currentDirectory);
                 _rwdList = rr.GetFolderContents().ToList();
             }
-            catch (Exception ex) { ExceptionHandler.Handle(ex); }
+            catch (Exception ex) { ExceptionHandler.Handle(ex, "Error getting list of RWD files"); }
         }
-            }
+    }
 }
