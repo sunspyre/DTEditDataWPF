@@ -54,6 +54,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DateTimeConvert.cs" />
+    <Compile Include="MainWindowEvents.cs" />
+    <Compile Include="MainWindowGridLogic.cs" />
     <Compile Include="Trim.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
