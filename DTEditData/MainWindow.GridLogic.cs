@@ -93,7 +93,7 @@ namespace DTEditData
 
         }
 
-        private void BuildGrid(DataTrackFile fileToLoad)
+        private void BuildGridFromFile(DataTrackFile fileToLoad)
         {
             _currentFile = fileToLoad;
             SetUpBackgroundWorker(_currentFile);
@@ -121,8 +121,12 @@ namespace DTEditData
         private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             IEnumerable<Record> list = (IEnumerable<Record>)e.Result;
+            BuildGridFromList(list);
+        }
 
-            
+        private void BuildGridFromList(IEnumerable<Record> list)
+        {
+            //build grid here
         }
 
         private void Isolate()
