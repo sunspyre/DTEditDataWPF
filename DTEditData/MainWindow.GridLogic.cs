@@ -2,6 +2,7 @@
 using DataTrack.IO.Structs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,9 @@ namespace DTEditData
 {
     public partial class MainWindow : Window
     {
+        private BackgroundWorker _backgroundWorker;
+        private DataTrackFile _currentFile;
+
         private void PopulateControls()
         {
             #region RWD Grid
@@ -86,6 +90,39 @@ namespace DTEditData
             #endregion
 
 
+
+        }
+
+        private void BuildGrid(DataTrackFile fileToLoad)
+        {
+            _currentFile = fileToLoad;
+            SetUpBackgroundWorker(_currentFile);
+
+        }
+
+        private void SetUpBackgroundWorker(DataTrackFile file)
+        {
+            _backgroundWorker = new BackgroundWorker();
+            _backgroundWorker.WorkerReportsProgress = false;
+            _backgroundWorker.WorkerSupportsCancellation = false;
+            _backgroundWorker.DoWork += _backgroundWorker_DoWork;
+            _backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
+
+            _backgroundWorker.RunWorkerAsync(file);
+        }
+
+        private void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //Read file contents here
+        }
+
+        private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //Build grid from contents here
+        }
+
+        private void Isolate()
+        {
 
         }
 

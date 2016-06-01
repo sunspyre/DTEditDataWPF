@@ -7,7 +7,6 @@ namespace DataTrack.IO.Structs
 {
     public class Scan : Record
     {
-        public DateTime Date { get; set; }
         public DateTime Time { get; set; }
         public string Device { get; set; }
         public string Probe { get; set; }

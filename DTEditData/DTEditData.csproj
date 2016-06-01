@@ -55,8 +55,8 @@
     </ApplicationDefinition>
     <Compile Include="ActivityLog.cs" />
     <Compile Include="DateTimeConvert.cs" />
-    <Compile Include="MainWindowEvents.cs" />
-    <Compile Include="MainWindowGridLogic.cs" />
+    <Compile Include="MainWindow.Events.cs" />
+    <Compile Include="MainWindow.GridLogic.cs" />
     <Compile Include="Trim.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -13,11 +13,17 @@ namespace DTEditData
     {
         private void gridDates_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            foreach (DataTrackFile item in gridDates.SelectedItems)
+            try
             {
-                ActivityLog.Log($"Opening RWD {item.Path}");
-                //MessageBox.Show(item.Path);
+                foreach (DataTrackFile item in gridDates.SelectedItems)
+                {
+                    ActivityLog.Log($"Opening RWD {item.Path}");
+                    MessageBox.Show(item.Path);
+                    BuildGrid(item);
+                    break; //No need to load more than one RWD
+                }
             }
+            catch(Exception ex) { ExceptionHandler.Handle(ex, "Error on date grid click event"); }
         }
     }
 }

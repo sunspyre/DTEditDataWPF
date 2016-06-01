@@ -29,7 +29,7 @@ namespace DTEditData
             GetArgs();
             GetBadges();
             GetFiles();
-            PopulateControls();
+            PopulateControls(); //MainWindow.GridLogic.cs
         }
 
         private void GetArgs()
