@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+
 
 namespace DTEditData
 {
-    static class ExceptionHandler
+    public static class ExceptionHandler
     {
         public static void Handle(Exception ex, string extraMessage = "")
         {
             //General entry point for exceptions
-            MessageBox.Show(ex.Message);
+            //MessageBox.Show(ex.Message);
             LogToFile(ex, extraMessage);
         }
 
@@ -23,12 +22,12 @@ namespace DTEditData
             {
                 using (var sw = new StreamWriter("log.txt", true))
                 {
-                    sw.WriteLineAsync($"{DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()} {ex.Message} {extraMessage}");
+                    sw.WriteLine($"{DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()} {ex.Message} {extraMessage}");
                 }
             }
             catch (Exception exc)
             {
-                MessageBox.Show($"There was an error writing to the error log file.{Environment.NewLine}{exc.Message}");
+                //MessageBox.Show($"There was an error writing to the error log file.{Environment.NewLine}{exc.Message}");
             }
         }
     }

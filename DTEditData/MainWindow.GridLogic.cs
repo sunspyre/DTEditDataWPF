@@ -108,17 +108,21 @@ namespace DTEditData
             _backgroundWorker.DoWork += _backgroundWorker_DoWork;
             _backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
 
-            _backgroundWorker.RunWorkerAsync(file);
+            _backgroundWorker.RunWorkerAsync(file.Path);
         }
 
         private void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            //Read file contents here
+            RwdReader reader = new RwdReader(e.Argument.ToString());
+            IEnumerable<Record> list = reader.GetFileContents(e.Argument.ToString());
+            e.Result = list;
         }
 
         private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //Build grid from contents here
+            IEnumerable<Record> list = (IEnumerable<Record>)e.Result;
+
+            
         }
 
         private void Isolate()

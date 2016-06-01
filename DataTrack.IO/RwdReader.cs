@@ -1,4 +1,5 @@
 ﻿using DataTrack.IO.Structs;
+using DTEditData;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -50,36 +51,44 @@ namespace DataTrack.IO
         /// <returns></returns>
         public IEnumerable<Record> GetFileContents(string fileName)
         {
-            _recordList = new List<Record>();
-            string[] contents;
-            using (var sr = new StreamReader(fileName))
+            try
             {
-                contents = sr.ReadToEnd().Replace("\r","").Split('\n');
-            }
-            foreach (string item in contents)
-            {
-                if (string.IsNullOrEmpty(item)) continue;
-                else if (item.Length < 31) continue; //RWD has 42 total characters (31 without button ID)
-                else if (item.Split(' ').Length != 4) continue; //RWD has 4 segments
-
-                string[] line = item.Split(' ');
-                string time = line[0];
-                string probeType = line[1];
-                string probeId = line[2];
-                string button = line[3].Substring(0,12);
-                //string flag = "";
-
-                _recordList.Add(new Scan
+                _recordList = new List<Record>();
+                string[] contents;
+                using (var sr = new StreamReader(_path))
                 {
-                    Button = button,
-                    Time = DateTime.ParseExact(time, "yyyyMMddHHmmsst", CultureInfo.InvariantCulture),
-                    Device = probeType,
-                    Probe = probeId,
-                    Type = RecordType.Scan
-                });
-            }
+                    contents = sr.ReadToEnd().Replace("\r", "").Split('\n');
+                }
+                foreach (string item in contents)
+                {
+                    string[] line = item.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
 
-            return _recordList;
+                    if (string.IsNullOrEmpty(item)) continue;
+                    else if (item.Length < 31) continue; //RWD has 42 total characters (31 without button ID)
+                    else if (line.Length != 4) continue; //RWD has 4 segments
+
+
+                    string time = line[0];
+                    string probeType = line[1];
+                    string probeId = line[2];
+                    string button = line[3].Substring(0, 12);
+                    //string flag = "";
+
+                    _recordList.Add(new Scan
+                    {
+                        Button = button,
+                        Time = DateTime.ParseExact(time, "yyyyMMddHHmmssf", CultureInfo.InvariantCulture),
+                        Device = probeType,
+                        Probe = probeId,
+                        Type = RecordType.Scan
+                    });
+                }
+
+                return _recordList;
+            }
+            catch (Exception ex) { ExceptionHandler.Handle(ex); return null; }
+
         }
+
     }
 }
