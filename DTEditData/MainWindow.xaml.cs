@@ -2,6 +2,7 @@
 using DataTrack.IO.Structs;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,6 +39,11 @@ namespace DTEditData
             var arguments = Environment.GetCommandLineArgs();
             if (arguments.Length > 1)
             {
+                if (!Directory.Exists(arguments[1]))
+                {
+                    MessageBox.Show($"Could not locate directory: {arguments[1]}");
+                    return;
+                }
                 _currentDirectory = arguments[1];
             }
         }
