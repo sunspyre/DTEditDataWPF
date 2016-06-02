@@ -78,8 +78,27 @@ namespace DTEditData
 
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Date",
-                Binding = new Binding("Date")
+                Header = "Time",
+                Binding = new Binding("Time"),
+                IsReadOnly = true
+            });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Device",
+                Binding = new Binding("Device"),
+                IsReadOnly = true
+            });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Probe",
+                Binding = new Binding("Probe"),
+                IsReadOnly = false
+            });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Button",
+                Binding = new Binding("Button"),
+                IsReadOnly = true
             });
 
             /*
@@ -97,7 +116,11 @@ namespace DTEditData
 
         private void BuildGrid(IEnumerable<Record> list)
         {
-            //build grid here
+            //foreach (Scan item in list)
+            //{
+            //    gridMain.Items.Add(item);
+            //}
+            gridMain.ItemsSource = list;
         }
 
         private void SetUpBackgroundWorker(DataTrackFile file)

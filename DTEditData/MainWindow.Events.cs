@@ -19,7 +19,7 @@ namespace DTEditData
                 {
                     ActivityLog.Log($"Opening RWD {item.Path}");
                     MessageBox.Show(item.Path);
-                    BuildGridFromFile(item);
+                    BuildGrid(item);
                     break; //No need to load more than one RWD
                 }
             }
