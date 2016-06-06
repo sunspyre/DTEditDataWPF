@@ -55,24 +55,35 @@ namespace DataTrack.IO
             {
                 _recordList = new List<Record>();
                 string[] contents;
+                long lineNumber = 0;
+
                 using (var sr = new StreamReader(_path))
                 {
                     contents = sr.ReadToEnd().Replace("\r", "").Split('\n');
                 }
                 foreach (string item in contents)
                 {
-                    string[] line = item.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                    lineNumber++;
+                    //Can't split by space because probe names could have a space
+                    //string[] line = item.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
 
                     if (string.IsNullOrEmpty(item)) continue;
                     else if (item.Length < 31) continue; //RWD has 42 total characters (31 without button ID)
-                    else if (line.Length != 4) continue; //RWD has 4 segments
+                    //else if (line.Length != 4) continue; //RWD has 4 segments
+                    string line = item.PadRight(50, ' '); //make sure no OutOfIndex error thrown below
 
-
-                    string time = line[0];
-                    string probeType = line[1];
-                    string probeId = line[2];
-                    string button = line[3].Substring(0, 12);
-                    //string flag = "";
+                    string time = line.Substring(0,15);
+                    string probeType = line.Substring(16, 2);
+                    string probeId = line.Substring(19, 10);
+                    string button = line.Substring(30, 12);
+                    if (string.IsNullOrWhiteSpace(time) ||
+                        string.IsNullOrWhiteSpace(probeType) ||
+                        string.IsNullOrWhiteSpace(probeId) ||
+                        string.IsNullOrWhiteSpace(button))
+                    {
+                        ExceptionHandler.Handle(new Exception(), $"Could not parse line {lineNumber} of {_path}. Entry skipped.");
+                        continue;
+                    }
 
                     _recordList.Add(new Scan
                     {
