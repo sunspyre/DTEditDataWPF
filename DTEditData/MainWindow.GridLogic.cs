@@ -15,7 +15,7 @@ namespace DTEditData
 
         private void PopulateControls()
         {
-            #region RWD Grid
+            #region gridDates
             gridDates.Columns.Add(new DataGridTextColumn
             {
                 Header = "Date",
@@ -24,7 +24,7 @@ namespace DTEditData
             gridDates.ItemsSource = _rwdList;
             #endregion
 
-            #region Badge Columns
+            #region gridBadges
 
             gridBadges.Columns.Add(new DataGridTextColumn
             {
@@ -71,28 +71,27 @@ namespace DTEditData
 
             #endregion
 
-            //TODO: implement this
-            #region DataTrack Columns
+            #region gridAbstract
 
-            gridMain.Columns.Add(new DataGridTextColumn
+            gridAbstract.Columns.Add(new DataGridTextColumn
             {
                 Header = "Time",
                 Binding = new Binding("Time"),
                 IsReadOnly = true
             });
-            gridMain.Columns.Add(new DataGridTextColumn
+            gridAbstract.Columns.Add(new DataGridTextColumn
             {
                 Header = "Device",
                 Binding = new Binding("Device"),
                 IsReadOnly = true
             });
-            gridMain.Columns.Add(new DataGridTextColumn
+            gridAbstract.Columns.Add(new DataGridTextColumn
             {
                 Header = "Probe",
                 Binding = new Binding("Probe"),
                 IsReadOnly = false
             });
-            gridMain.Columns.Add(new DataGridTextColumn
+            gridAbstract.Columns.Add(new DataGridTextColumn
             {
                 Header = "Button",
                 Binding = new Binding("Button"),
@@ -106,8 +105,15 @@ namespace DTEditData
 
             #endregion
 
+            #region gridMain
 
-
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Implement this",
+                Binding = new Binding("Time"),
+                IsReadOnly = true
+            });
+            #endregion
         }
 
         private void BuildGrid(DataTrackFile fileToLoad) => SetUpBackgroundWorker(fileToLoad);
@@ -118,7 +124,7 @@ namespace DTEditData
             //{
             //    gridMain.Items.Add(item);
             //}
-            gridMain.ItemsSource = list;
+            gridAbstract.ItemsSource = list;
         }
 
         private void SetUpBackgroundWorker(DataTrackFile file)
