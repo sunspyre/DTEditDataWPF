@@ -13,6 +13,18 @@ namespace DTEditData
         private BackgroundWorker _backgroundWorker;
         private DataTrackFile _currentFile;
 
+        private const string DATECOLUMN = "Date";
+        private const string TIMECOLUMN = "Time";
+        private const string PROBECOLUMN = "ProbeID";
+        private const string BADGECOLUMN = "BadgeID";
+        private const string BUTTONCOLUMN = "ButtonID";
+        private const string TYPECOLUMN = "Type";
+        private const string DESCCOLUMN = "Desc";
+        private const string MISCCOLUMN = "Misc";
+        private const string SPECIALCOLUMN = "Sp";
+        private const string FLAGCOLUMN = "Flag";
+
+
         private void PopulateControls()
         {
             #region gridDates
@@ -109,61 +121,61 @@ namespace DTEditData
 
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Date",
+                Header = DATECOLUMN,
                 Binding = new Binding("Date"),
                 IsReadOnly = true
             });
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Time",
+                Header = TIMECOLUMN,
                 Binding = new Binding("Time"),
                 IsReadOnly = true
             });
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Flag",
+                Header = FLAGCOLUMN,
                 Binding = new Binding("Flag"),
                 IsReadOnly = true
             });
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Probe",
+                Header = PROBECOLUMN,
                 Binding = new Binding("ProbeId"),
                 IsReadOnly = true
             });
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Badge",
+                Header = BADGECOLUMN,
                 Binding = new Binding("BadgeId"),
                 IsReadOnly = true
             });
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Special",
+                Header = SPECIALCOLUMN,
                 Binding = new Binding("Special"),
                 IsReadOnly = true
             });
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Type",
+                Header = TYPECOLUMN,
                 Binding = new Binding("Type"),
                 IsReadOnly = true
             });
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Desc",
+                Header = DESCCOLUMN,
                 Binding = new Binding("Desc"),
                 IsReadOnly = true
             });
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Misc",
+                Header = MISCCOLUMN,
                 Binding = new Binding("Misc"),
                 IsReadOnly = true
             });
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Button",
+                Header = BUTTONCOLUMN,
                 Binding = new Binding("ButtonId"),
                 IsReadOnly = true
             });

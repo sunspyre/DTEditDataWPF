@@ -9,12 +9,17 @@ namespace DTEditData
 {
     public partial class MainWindow : Window
     {
+        private Visibility CheckVisibility(bool checkBoxValue)
+        {
+            if (checkBoxValue)
+                return Visibility.Visible;
+            else
+                return Visibility.Hidden;
+        }
         private void CheckColumns(object sender, RoutedEventArgs e)
         {
-            if (chkShowButtonId.IsChecked.Value)
-                gridMain.Columns[0].Visibility = Visibility.Collapsed;
-            else
-                gridMain.Columns[0].Visibility = Visibility.Visible;
+            
+
 
 
 
