@@ -54,6 +54,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ActivityLog.cs" />
+    <Compile Include="MainWindow.Options.cs" />
     <Compile Include="DateTimeConvert.cs" />
     <Compile Include="MainWindow.Events.cs" />
     <Compile Include="MainWindow.GridLogic.cs" />

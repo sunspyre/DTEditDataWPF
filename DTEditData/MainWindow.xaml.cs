@@ -21,7 +21,7 @@ namespace DTEditData
         private const string DATAFOLDER = "data";
         private const string BADGEFILE = "badge.def";
 
-        internal List<Record> _badgeList;
+        internal List<Badge> _badgeList;
         internal List<DataTrackFile> _rwdList;
 
         public MainWindow()
@@ -53,7 +53,7 @@ namespace DTEditData
             try
             {
                 DefReader br = new DefReader(_currentDirectory);
-                _badgeList = br.GetFileContents(BADGEFILE).ToList();
+                _badgeList = (List<Badge>)br.GetFileContents(BADGEFILE);
             }
             catch (Exception ex) { ExceptionHandler.Handle(ex, "Error getting list of badges"); }
         }
@@ -67,5 +67,7 @@ namespace DTEditData
             }
             catch (Exception ex) { ExceptionHandler.Handle(ex, "Error getting list of RWD files"); }
         }
+
+
     }
 }

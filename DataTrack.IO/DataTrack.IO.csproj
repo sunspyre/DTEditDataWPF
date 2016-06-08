@@ -50,6 +50,7 @@
     <Compile Include="RwdReader.cs" />
     <Compile Include="Structs\Badge.cs" />
     <Compile Include="Structs\Record.cs" />
+    <Compile Include="Structs\RwdRecord.cs" />
     <Compile Include="Structs\Scan.cs" />
   </ItemGroup>
   <ItemGroup>

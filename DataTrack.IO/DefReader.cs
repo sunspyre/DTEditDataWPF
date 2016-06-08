@@ -12,7 +12,7 @@ namespace DataTrack.IO
     public class DefReader : IReader
     {
         private string _path;
-        private List<Record> _badgeList;
+        private List<Badge> _badgeList;
         private List<DataTrackFile> _fileList;
 
         public DefReader(string path)
@@ -50,9 +50,9 @@ namespace DataTrack.IO
             }
         }
 
-        private IEnumerable<Record> ParseBadge(string fileName)
+        private List<Badge> ParseBadge(string fileName)
         {
-            _badgeList = new List<Record>();
+            _badgeList = new List<Badge>();
             string[] _contents;
             try
             {

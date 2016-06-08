@@ -109,10 +109,66 @@ namespace DTEditData
 
             gridMain.Columns.Add(new DataGridTextColumn
             {
-                Header = "Implement this",
+                Header = "Date",
+                Binding = new Binding("Date"),
+                IsReadOnly = true
+            });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Time",
                 Binding = new Binding("Time"),
                 IsReadOnly = true
             });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Flag",
+                Binding = new Binding("Flag"),
+                IsReadOnly = true
+            });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Probe",
+                Binding = new Binding("ProbeId"),
+                IsReadOnly = true
+            });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Badge",
+                Binding = new Binding("BadgeId"),
+                IsReadOnly = true
+            });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Special",
+                Binding = new Binding("Special"),
+                IsReadOnly = true
+            });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Type",
+                Binding = new Binding("Type"),
+                IsReadOnly = true
+            });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Desc",
+                Binding = new Binding("Desc"),
+                IsReadOnly = true
+            });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Misc",
+                Binding = new Binding("Misc"),
+                IsReadOnly = true
+            });
+            gridMain.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Button",
+                Binding = new Binding("ButtonId"),
+                IsReadOnly = true
+            });
+
+
             #endregion
         }
 
@@ -125,6 +181,12 @@ namespace DTEditData
             //    gridMain.Items.Add(item);
             //}
             gridAbstract.ItemsSource = list;
+            
+        }
+
+        private void BuildGrid(List<RwdRecord> list)
+        {
+            gridMain.ItemsSource = list;
         }
 
         private void SetUpBackgroundWorker(DataTrackFile file)
@@ -141,11 +203,47 @@ namespace DTEditData
         private void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             RwdReader reader = new RwdReader(e.Argument.ToString());
-            IEnumerable<Record> list = reader.GetFileContents(e.Argument.ToString());
-            e.Result = list;
+            IEnumerable<Record> scanList = reader.GetFileContents(e.Argument.ToString());
+            List<RwdRecord> filteredRecordList = new List<RwdRecord>();
+
+            foreach (Scan item in scanList)
+            {
+                bool exists = _badgeList.Exists(x => x.ButtonId.Equals(item.Button));
+                if (exists)
+                {
+                    Badge tempBadge = _badgeList.Find(x => x.ButtonId.Equals(item.Button));
+
+                    filteredRecordList.Add(new RwdRecord {
+                        Date = item.Time.ToShortDateString(),
+                        Time = item.Time.ToShortTimeString(),
+                        Flag = "",
+                        ProbeId = item.Probe,
+                        BadgeId = tempBadge.BadgeId,
+                        Special = tempBadge.Special,
+                        Type1 = tempBadge.Type1,
+                        Type2 = tempBadge.Type2,
+                        Desc = tempBadge.Desc,
+                        Misc = tempBadge.Misc,
+                        ButtonId = tempBadge.ButtonId,
+                        ExtraDetails = tempBadge.ExtraDetails.Split(';')
+                    });
+                }
+                else
+                {
+                    filteredRecordList.Add(new RwdRecord
+                    {
+                        Date = item.Time.ToShortDateString(),
+                        Time = item.Time.ToShortTimeString(),
+                        Flag = "",
+                        ProbeId = item.Probe
+                    });
+                }
+            }
+
+            e.Result = filteredRecordList;
         }
 
-        private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => BuildGrid((IEnumerable<Record>)e.Result);
+        private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => BuildGrid((List<RwdRecord>)e.Result);
 
 
         private void Isolate()
