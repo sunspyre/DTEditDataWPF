@@ -186,17 +186,12 @@ namespace DTEditData
 
         private void BuildGrid(DataTrackFile fileToLoad) => SetUpBackgroundWorker(fileToLoad);
 
-        private void BuildGrid(IEnumerable<Record> list)
+        private void PopulateGrid(IEnumerable<Record> list)
         {
-            //foreach (Scan item in list)
-            //{
-            //    gridMain.Items.Add(item);
-            //}
             gridAbstract.ItemsSource = list;
-            
         }
 
-        private void BuildGrid(List<RwdRecord> list)
+        private void PopulateGrid(List<RwdRecord> list)
         {
             gridMain.ItemsSource = list;
         }
@@ -255,7 +250,7 @@ namespace DTEditData
             e.Result = filteredRecordList;
         }
 
-        private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => BuildGrid((List<RwdRecord>)e.Result);
+        private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => PopulateGrid((List<RwdRecord>)e.Result);
 
 
         private void Isolate()

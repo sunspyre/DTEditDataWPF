@@ -30,8 +30,10 @@ namespace DTEditData
             GetArgs();
             GetBadges();
             GetFiles();
+            GetOptions(); //MainWindow.Options.cs
             PopulateControls(); //MainWindow.GridLogic.cs
         }
+
 
         private void GetArgs()
         {

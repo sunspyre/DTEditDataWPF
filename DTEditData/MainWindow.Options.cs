@@ -9,6 +9,13 @@ namespace DTEditData
 {
     public partial class MainWindow : Window
     {
+        private void GetOptions() //Initial load
+        {
+            chkShowDate.IsChecked = true;
+            chkShowSpecial.IsChecked = true;
+            chkShowButtonId.IsChecked = true;
+
+        }
         private Visibility CheckVisibility(bool checkBoxValue)
         {
             if (checkBoxValue)
