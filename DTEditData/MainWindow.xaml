@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DTEditData"
         mc:Ignorable="d"
-        Title="MainWindow" Height="408.005" Width="787.5">
+        Title="MainWindow" Height="408.005" Width="866.028">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="Black" Offset="0"/>
@@ -21,7 +21,7 @@
                 </LinearGradientBrush>
             </TabControl.Background>
             <TabItem Header="Main">
-                <Grid Background="#FFE5E5E5" Margin="128,0,0,0">
+                <Grid Background="#FFE5E5E5" Margin="128,0,141,0">
                     <DataGrid x:Name="gridMain" Margin="10" AutoGenerateColumns="False"/>
                     <DataGrid x:Name="gridDates" HorizontalAlignment="Left" Margin="-125,5,0,10" Width="113" MouseDoubleClick="gridDates_MouseDoubleClick" AutoGenerateColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True"/>
                 </Grid>
@@ -43,11 +43,20 @@
                     <CheckBox x:Name="chkShowSpecial" Content="Show Special" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,29,0,0" Click="CheckColumns"/>
                     <CheckBox x:Name="chkShowDate" Content="Show Date" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,50,0,0" Click="CheckColumns"/>
                     <Slider x:Name="slider" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,90,0,0" Width="119"/>
-                    
+
 
                 </Grid>
             </TabItem>
         </TabControl>
-
+        <TabControl x:Name="tabControl1" HorizontalAlignment="Right" Height="339" VerticalAlignment="Top" Width="123" Margin="0,29,10,0">
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5">
+                    <CheckBox x:Name="chkIsolateProbes" Content="Isolate Badge" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="chkIsolateProbes_Checked"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

@@ -252,11 +252,30 @@ namespace DTEditData
 
         private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) => PopulateGrid((List<RwdRecord>)e.Result);
 
-
-        private void Isolate()
+        private void chkIsolateProbes_Checked(object sender, RoutedEventArgs e)
         {
+            var selectedLines = gridMain.SelectedItems;
 
+            foreach (RwdRecord selection in selectedLines)
+            {
+                foreach (RwdRecord record in gridMain.ItemsSource)
+                {
+                    DataGridRow row = (DataGridRow)gridMain.ItemContainerGenerator.ContainerFromItem(record);
+
+                    if (row == null) continue;
+
+                    if (record.ProbeId.Equals(selection.ProbeId))
+                    {
+                        row.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        row.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+
+            gridMain.UpdateLayout();
         }
-
     }
 }
